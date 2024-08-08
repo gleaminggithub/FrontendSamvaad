@@ -7,10 +7,10 @@
     "@cloudinary/url-gen": "^1.19.0",
     "@emoji-mart/data": "^1.1.2",
     "@emoji-mart/react": "^1.1.1",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.0",
-    "@mui/material": "^5.16.0",
+    "@mui/material": "^5.16.6",
     "@mui/styles": "^5.16.0",
     "@stream-io/video-react-sdk": "^1.2.13",
     "@testing-library/jest-dom": "^5.17.0",
@@ -58,7 +58,6 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
   "author": "",
   "license": "ISC"
 }
