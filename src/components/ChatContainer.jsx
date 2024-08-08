@@ -8,6 +8,7 @@ import {
   sendMessageRoute,
   recieveMessageRoute,
   exitGroup,
+  resetToken,
 } from "../utils/APIRoutes";
 import { IconButton } from "@mui/material";
 import { Videocam } from "@mui/icons-material";
@@ -21,6 +22,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { MyContext } from "../ContextApi/remove";
 import Welcome from "./Welcome";
 import { useNavigate } from "react-router-dom";
+import VideoCalling from "./VideoCalling";
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef(null);
@@ -28,9 +30,12 @@ export default function ChatContainer({ currentChat, socket }) {
   const [ShowChatBot, setShowChatbot] = useState(true);
   // const [VideoCall, setVideoCall] = useState(false);
   const [status, setStatus] = useState(false);
+  const [call,setCall] =useState();
+  const [incomingCall, setIncomingCall] = useState(null);
   const { state, setState, msgstate, setMsgstate,VideoCall,setVideoCall } = useContext(MyContext);
-
+  const [token,setToken]=useState(null);
   const [dataId,setDataID] = useState();
+  const [reset,setReset] = useState();
   const navigate = useNavigate();
   console.log(currentChat);
   useEffect(() => {
@@ -126,7 +131,6 @@ export default function ChatContainer({ currentChat, socket }) {
       });
       setMessages(msgs);
     }
-
   };
   const deleteCurrentUser = async () => {
     console.log("Delete User");
@@ -195,6 +199,77 @@ export default function ChatContainer({ currentChat, socket }) {
   const toggleVideoCall = () => {
     setVideoCall(!VideoCall);
   };
+  const handletoken=(tkn)=>{
+    const {item,key}=tkn;
+    if(!currentChat.isGroupChat)
+   { 
+    socket.current.emit('videoCallRequest', { token:key, recipient: currentChat.user._id});
+    setCall(true);
+    setToken(key);
+    console.log('sender-end',key);
+  }
+    console.log('token',tkn);
+  }
+
+  const handleAcceptCall = () => {
+    if (incomingCall) {
+      socket.current.emit('acceptVideoCall', { sender: incomingCall.sender, token: incomingCall.token });
+        console.log('Call accepted. Joining call...');
+        setReset(incomingCall.token);
+        // Join the video call using the token
+        // ...
+        setCall(true);
+        console.log('reciever-end',incomingCall.token);
+        setToken(incomingCall.token);
+        setIncomingCall(null);
+    }
+};
+const handleRejectCall =async()=>{
+  setReset(incomingCall.token);
+  setIncomingCall(null);
+  socket.current.emit('videoCallRejected', { sender: incomingCall.sender});
+  console.log("call Rejected...");
+}
+useEffect(() => {
+    // Listen for incoming video call requests
+    console.log('Checking');
+    socket.current.on('incomingVideoCall', (data) => {
+      console.log(data);
+        console.log('Incoming video call from:', data.sender);
+        setIncomingCall(data);
+    });
+
+    // Listen for call acceptance
+    socket.current.on('videoCallAccepted', (data) => {
+        console.log('Video call accepted. Joining call with token:', data.token);
+        // Join the video call using the token
+        // ...
+    });
+    socket.current.on('VideocallDenied',(data)=>{
+      console.log(data.Message);
+    })
+    return () => {
+      socket.current.off('incomingVideoCall');
+      socket.current.off('videoCallAccepted');
+    };
+}, [socket.current]);
+
+const handleVideo=(value)=>{
+  if(value) {setVideoCall(!VideoCall);
+  }
+}
+const handlecalls = async (value)=>{
+  setCall(value);
+   try {
+        const response = await axios.post(resetToken,{
+          _id:reset.token._id
+        });
+        console.log(`IsAvailable with ${reset.token._id} is true`);
+      } catch (err) {
+        console.error("Error fetching items:", err);
+      }
+  console.log(reset);
+}
   return (
     <>
        {!state ?(<Welcome/>):(<div className="chatContainer background-image">
@@ -239,13 +314,24 @@ export default function ChatContainer({ currentChat, socket }) {
               </span>
             </div>
           </div>
-          {!ShowChatBot && <ChatBot />}
+          {!ShowChatBot && <div className=""><ChatBot /></div>}
           {VideoCall && (
             <div className="VideoCall">
-              <TokenList />
+              <TokenList currentChat={currentChat} socket={socket} Token={handletoken} Video={handleVideo} />
             </div>
           )}
-          <div className="chat-messages">
+          { call && <div className="VideoFrame"><VideoCalling stream={token} calls={handlecalls}/></div>}
+          {incomingCall ? (
+            <div class="incoming-call-container">
+  <p>Incoming call from {incomingCall.sender}</p>
+  <div class="button-group">
+    <button class="accept-button" onClick={handleAcceptCall}>Accept Call</button>
+    <button class="reject-button" onClick={handleRejectCall}>Reject Call</button>
+  </div>
+</div>
+
+            ) : (
+              <div className="chat-messages">
             {messages.map((message) => {
               {/* console.log(message); */}
               const isSent = message.fromSelf;
@@ -307,6 +393,9 @@ export default function ChatContainer({ currentChat, socket }) {
               );
             })}
           </div>
+            )}
+           
+          
           <ChatInput handleSendMsg={handleSendMsg} />
         </div>) } 
     </>

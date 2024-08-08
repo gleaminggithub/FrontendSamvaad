@@ -4,12 +4,14 @@ import { getToken, bookedToken, resetToken } from "../utils/APIRoutes";
 import VideoCalling from './VideoCalling';
 import '../css/style.css';
 
-const TokenList = () => {
+const TokenList = ({currentChat,socket,Token,Video}) => {
   const [items, setItems] = useState([]);
   const [video, setVideo] = useState(false);
   const [meet, setMeet] = useState(null);
   const [end, setEnd] = useState(false);
-
+  const [videoCallToken, setVideoCallToken] = useState('');
+  const [incomingCall, setIncomingCall] = useState(null);
+  console.log(currentChat);
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -23,11 +25,16 @@ const TokenList = () => {
     fetchItems();
   }, []);
 
-  const handleBookToken = async (id) => {
+  const handleBookToken = async (item) => {
     try {
-        console.log(id);
-      const response = await axios.post(`${bookedToken}/${id}`);
+        console.log(item._id);
+        console.log(item);
+        // const id = JSON.stringify(item._id);
+      const response = await axios.post(`${bookedToken}/${item._id}`);
       console.log(response);
+      const key=response.data;
+      Token({item,key});
+      Video(true);
       setMeet(response.data);
       setVideo(true);
       // Update the list of items with the new status
@@ -36,12 +43,12 @@ const TokenList = () => {
     }
   };
 
-  return (<>{!video ? (<div className="item-list">
+
+  return (<><div className="item-list">
     <h2 className="list-title">Item List</h2>
-  
       <ul className="scrollable-list">
         {items.map((item, index) => (
-          <li key={index} className="list-item" onClick={() => handleBookToken(item._id)}>
+          <li key={index} className="list-item" onClick={() => handleBookToken(item)}>
             <div className="item-content">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLXsvLE0dGD2_5ibZIlyIiH_nNM_x0LnnFgg&s"
@@ -56,8 +63,11 @@ const TokenList = () => {
           </li>
         ))}
       </ul>
-  </div>) : (
-      <VideoCalling stream={meet} />)}</>
+  </div>
+  </>
     )
 };
 export default TokenList;
+
+
+// (<VideoCalling stream={meet} />)

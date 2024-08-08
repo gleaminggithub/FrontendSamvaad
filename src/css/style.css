@@ -371,18 +371,7 @@
   width: 87%;
   font-size: 1rem;
 }
-.current-user .avatar{
-  display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  align-items: center;
-  padding: 5px;
 
-}
-.current-user .avatar .username h2{
-  padding: 2px 5px;
-  font-size: 1rem;;
-}
 @media screen and (min-width: 720px) and (max-width: 1080px) {
   .inputContainer {
     padding: 0 1rem;
@@ -578,8 +567,10 @@
 }
 
 .contactContainer {
-  display: grid;
-  grid-template-rows: 11% 10% 70%;
+  display: flex;
+  /* grid-template-rows: 11% 10% 70%;
+   */
+   flex-direction: column;
   overflow: hidden;
   background-color: #080420;
   border-radius: 20px 0px 0px 20px;
@@ -661,19 +652,49 @@
 .current-user {
   background-color: #0d0d30;
   display: flex;
-  justify-content: stretch;
+  flex-direction: column; /* Adjust layout direction */
+  align-items: center; /* Center items horizontally */
+  padding: 0.25rem; /* Add padding */
+  gap: 1rem; /* Adjust gap */
+  border-radius: 8px; /* Optional: for rounded corners */
+  max-width: 100%; /* Ensure it fits within the container */
+  box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+.current-user .avatar {
+  display: flex;
+  flex-direction: column; /* Adjust layout direction for avatar */
   align-items: center;
-  gap: 2rem;
 }
 
 .current-user .avatar img {
   min-height: 3rem;
-  max-inline-size: 100%;
+  max-width: 100%; /* Ensure image scales within its container */
+  border-radius: 50%; /* Optional: for rounded avatar */
 }
 
 .current-user .username h2 {
   color: white;
+  font-size: 1rem; /* Adjust font size for smaller screens */
+  text-align: center; /* Center text horizontally */
+  margin: 0; /* Remove default margin */
 }
+
+@media (min-width: 720px) {
+  .current-user {
+    flex-direction: row; /* Switch to row direction on larger screens */
+    justify-content: flex-start; /* Align items to start */
+  }
+
+  .current-user .avatar {
+    flex-direction: row; /* Row layout for avatar on larger screens */
+  }
+
+  .current-user .username h2 {
+    font-size: 1.2rem; /* Larger font size on wider screens */
+  }
+}
+
 .chat-Sideheader-icon svg{
   color:white;
   border-radius: 50%;
@@ -857,20 +878,41 @@
   max-width: 20%;
 } */
 
+.str-video{
+  max-width: 60%;
+}
+/*
 .str-video {
   display: flex;
   flex-direction: column;
   height: 100vh; /* Full viewport height */
-}
 
-.str-video__call-controls {
+/* .str-video__call-controls { */
   /* Footer styling */
-  background-color: #333; /* Example background color */
-  color: #fff; /* Example text color */
-  padding: 10px; /* Example padding */
-  text-align: center; /* Center the controls */
+  /* background-color: #333; Example background color */
+  /* color: #fff; Example text color */
+ /* / padding: 10px; Example padding */
+  /* text-align: center; Center the controls */
+/* } */
+.str-video__call-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  width: 50%;
 }
 
+.VideoFrame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%; /* Sets a maximum width of 90% of the viewport */
+  max-height: 100vh; /* Sets a maximum height of 90% of the viewport height */
+  background-color: antiquewhite;
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  overflow: hidden; /* Ensures that content stays within the bounds */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
 .VideoCall{
   display: flex;
   justify-content: center;
@@ -1188,3 +1230,73 @@
   margin: 0;
   color: #666;
 }
+
+/* Incoming Call Container */
+.incoming-call-container {
+  background-color: #282c34;
+  color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 90%;
+  margin:auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-align: center; /* Center text horizontally */
+}
+
+.incoming-call-container p {
+  font-size: 1rem;
+  margin-bottom: 1rem; /* Space between text and buttons */
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically by default */
+  gap: 0.5rem; /* Space between buttons */
+}
+
+.accept-button, .reject-button {
+  background-color: #61dafb;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.reject-button {
+  background-color: #ff4d4d;
+}
+
+.accept-button:hover, .reject-button:hover {
+  background-color: #4fa3c6;
+}
+
+.reject-button:hover {
+  background-color: #e43f3f;
+}
+
+/* Responsive design */
+@media (min-width: 600px) {
+  .incoming-call-container {
+    max-width: 50%;
+  }
+
+  .button-group {
+    flex-direction: row; /* Align buttons horizontally on larger screens */
+    justify-content: center; /* Center buttons horizontally */
+  }
+
+  .accept-button, .reject-button {
+    font-size: 1.2rem;
+    padding: 0.75rem 1.5rem; /* Larger padding for bigger buttons */
+  }
+}
+
+@media (min-width: 900px) {
+  .incoming-call-container {
+    max-width: 40%;
+  }
+}
+
