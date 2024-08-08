@@ -1,0 +1,17 @@
+export const host = "https://backendsamvaad.onrender.com";
+export const loginRoute = `${host}/api/auth/login`;
+export const registerRoute = `${host}/api/auth/register`;
+export const logoutRoute = `${host}/api/auth/logout`;
+export const allUsersRoute = `${host}/api/auth/allusers`;
+export const sendMessageRoute = `${host}/api/messages/addmsg`;
+export const recieveMessageRoute = `${host}/api/messages/getmsg`;
+export const setAvatarRoute = `${host}/api/auth/setavatar`;
+export const accessChat = `${host}/api/chat/`;
+export const fetchChat = `${host}/api/chat/fetchChat`;
+export const createGroupChat = `${host}/api/chat/createGroup`;
+export const fetchGroups = `${host}/api/chat/fetchGroups`;
+export const exitGroup  = `${host}/api/chat/exitGroup`;
+export const addSelf  = `${host}/api/chat/addSelf`;
+export const getToken = `${host}/api/token/getToken`;
+export const bookedToken = `${host}/api/token/bookedToken`;
+export const resetToken = `${host}/api/token/resetToken`;
