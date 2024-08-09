@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/style.css";
-import SearchIcon from '@mui/icons-material/Search';
+
 import {accessChat, fetchChat } from '../utils/APIRoutes';
 import axios from "axios";
 export default function AllUsers({userList}) {
@@ -26,7 +26,7 @@ export default function AllUsers({userList}) {
     return (
     <div className="add-user">
         <div className="search-box">
-          <span className="search-icon"><SearchIcon /></span>
+          <span className="search-icon">SearchB</span>
           <input
             type="text"
             onChange={handleSearchChange}

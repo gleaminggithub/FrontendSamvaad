@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/style.css";
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import { createGroupChat, fetchGroups, addSelf } from '../utils/APIRoutes';
 import axios from "axios";
 import Group from './GroupForm';
-import GroupsIcon from '@mui/icons-material/Groups';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+// import GroupsIcon from '@mui/icons-material/Groups';
+// import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 export default function GroupList() {
     const [currentSelected, setCurrentSelected] = useState(null);
@@ -77,7 +77,7 @@ export default function GroupList() {
     return (
         <div className="add-user">
             <div className="search-box group-list">
-                <span className="search-icon"><SearchIcon /></span>
+                <span className="search-icon"><span>SearchIcon </span></span>
                 <input
                     type="text"
                     onChange={handleSearchChange}
@@ -86,7 +86,7 @@ export default function GroupList() {
                 />
             </div>
             <button onClick={() => setShowGroupForm(prev => !prev)} className="toggle-button">
-                {showGroupForm ? <GroupAddIcon /> : <GroupsIcon />}
+                {showGroupForm ?<span>GroupAddIcon</span> :<span>GroupsIcon</span>}
             </button>
             {showGroupForm ? (
                 <Group handledata={handledata} />

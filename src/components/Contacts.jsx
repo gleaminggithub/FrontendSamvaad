@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../css/style.css";
-import Logo from "../assets/images.jpeg";
-import Button from "@mui/material/Button";
-import DuoIcon from "@mui/icons-material/Duo";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import SearchIcon from "@mui/icons-material/Search";
-import { IconButton } from "@mui/material";
+// import Logo from "../assets/images.jpeg";
+// import Button from "@mui/material/Button";
+// import DuoIcon from "@mui/icons-material/Duo";
+// import PersonAddIcon from "@mui/icons-material/PersonAdd";
+// import GroupAddIcon from "@mui/icons-material/GroupAdd";
+// import SearchIcon from "@mui/icons-material/Search";
+// import { IconButton } from "@mui/material";
 import Logout from "./Logout";
 import AllUsers from "./AllUsers";
 import { fetchChat } from "../utils/APIRoutes";
-import AddIcon from "@mui/icons-material/Add";
+// import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import GroupList from "./GroupsList";
-import CloseIcon from "@mui/icons-material/Close";
+// import CloseIcon from "@mui/icons-material/Close";
 import { MyContext } from "../ContextApi/remove";
 
 export default function Contacts({ contacts, changeChat, socket }) {
@@ -136,19 +136,19 @@ export default function Contacts({ contacts, changeChat, socket }) {
               </div>
               <div className="SidebarIcon">
                 <span className="chat-Sideheader-icon">
-                  <IconButton onClick={handlePersonAdd}>
-                    {addPerson ? <AddIcon /> : <PersonAddIcon />}
-                  </IconButton>
+                  <span onClick={handlePersonAdd}>IconButton
+                    {addPerson ?<span>AddIcon</span> :<span>PersonAddIcon</span>}
+                  </span>
                 </span>
                 <span className="chat-Sideheader-icon">
-                  <IconButton onClick={handlegroup}>
-                    {group ? <CloseIcon /> : <GroupAddIcon />}
-                  </IconButton>
+                  <span onClick={handlegroup}>IconButton
+                    {group ?<span>CloseIcon</span> :<span>GroupAddIcon</span>}
+                  </span>
                 </span>
                 <span className="chat-Sideheader-icon">
-                  <IconButton>
+                  <span>IconButton
                     <Logout />
-                  </IconButton>
+                  </span>
                 </span>
               </div>
             </div>
@@ -163,7 +163,7 @@ export default function Contacts({ contacts, changeChat, socket }) {
                 <>
                   <div className="searchBox">
                     <span>
-                      <SearchIcon />
+                      <span>SearchIcon</span>
                     </span>
                     <input
                       type="text"

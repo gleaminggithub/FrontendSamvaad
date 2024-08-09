@@ -10,15 +10,15 @@ import {
   exitGroup,
   resetToken,
 } from "../utils/APIRoutes";
-import { IconButton } from "@mui/material";
-import { Videocam } from "@mui/icons-material";
-import CallIcon from "@mui/icons-material/Call";
-import LogoutIcon from "@mui/icons-material/Logout";
-import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
+// import { IconButton } from "@mui/material";
+// import { Videocam } from "@mui/icons-material";
+// import CallIcon from "@mui/icons-material/Call";
+// import LogoutIcon from "@mui/icons-material/Logout";
+// import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import ChatBot from "./ChatBot";
-import CloseIcon from "@mui/icons-material/Close";
+// import CloseIcon from "@mui/icons-material/Close";
 import TokenList from "./TokenList";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+// import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { MyContext } from "../ContextApi/remove";
 import Welcome from "./Welcome";
 import { useNavigate } from "react-router-dom";
@@ -289,28 +289,28 @@ const handlecalls = async (value)=>{
             </div>
             <div className="chat_header_icons">
               <span onClick={toggleChatbot} className="chat-header-icon">
-                <IconButton>
+                IconButtonB
                   {ShowChatBot ? (
-                    <FaceRetouchingNaturalIcon />
+                    <span>FaceRetouchingNaturalIconB</span>
                   ) : (
-                    <CloseIcon className="Close-Button" />
+                    <span className="Close-Button" >CloseIcon</span>
                   )}
-                </IconButton>
+                IconButtonB
               </span>
               <span onClick={toggleVideoCall} className="chat-header-icon">
-                <IconButton>
-                  <Videocam />
-                </IconButton>
+                <span>IconButtonB</span>
+                <span>VideocamB</span>
+                <span>IconButtonB</span>
               </span>
               <span className="chat-header-icon">
-                <IconButton>
-                  <CallIcon />
-                </IconButton>
+              <span>IconButtonB</span>
+                  <span>CallIcon</span>
+                  <span>IconButtonB</span>
               </span>
               <span className="chat-header-icon" onClick={deleteCurrentUser}>
-                <IconButton>
-                  <DeleteOutlineIcon />
-                </IconButton>
+              <span>IconButtonB</span>
+                  <span>DeleteOutlineIcon</span>
+                  <span>IconButtonB</span>
               </span>
             </div>
           </div>

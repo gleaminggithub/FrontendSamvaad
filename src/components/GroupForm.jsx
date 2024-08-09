@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/style.css";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
+// import  from "@mui/icons-material/AttachFile";
 
 const GroupForm = ({ handledata }) => {
   const [groupName, setGroupName] = useState("");
@@ -54,7 +54,7 @@ const GroupForm = ({ handledata }) => {
           />
         </div>
         <div className='formgroup'>
-          <label htmlFor='groupImage'><span>Upload Image : </span><AttachFileIcon /></label>
+          <label htmlFor='groupImage'><span>Upload Image : </span>AttachFileIcon</label>
           <input
             type='file'
             id='groupImage'

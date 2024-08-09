@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SendIcon from '@mui/icons-material/Send';
 import axios from "axios";
 
 const ChatBot = () => {
@@ -55,7 +52,7 @@ const ChatBot = () => {
       </div>
       <ul className='chatBox'>
         <li className='chat incoming'>
-          <span><FaceRetouchingNaturalIcon /></span>
+          <span>FaceretouchB</span>
           <p>Hi there <br /> How can I help You Today?</p>
         </li>
         {conversations.map((val, index) => (
@@ -63,11 +60,11 @@ const ChatBot = () => {
             {val.type === 'request' ? (
               <>
                 <p>{val.text}</p>
-                <AccountCircleIcon />
+                AccountCircleIconB
               </>
             ) : (
               <>
-                <span><FaceRetouchingNaturalIcon /></span>
+                <span>FaceRetouchingNaturalIconB</span>
                 <p>{val.text}</p>
               </>
             )}
@@ -81,7 +78,7 @@ const ChatBot = () => {
           placeholder="Enter a message..."
         />
         <button onClick={handleSubmit} className='ChatBot-Button'>
-          <SendIcon />
+          SendIconB 
         </button>
       </div>
     </div>

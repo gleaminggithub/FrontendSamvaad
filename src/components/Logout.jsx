@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 import "../css/style.css";
 import axios from "axios";
 import { logoutRoute } from "../utils/APIRoutes";
@@ -18,7 +18,7 @@ export default function Logout() {
   };
   return (
     <div onClick={handleClick} className="Logout">
-      <LogoutIcon />
+      LogoutIcon 
     </div>
   );
 }

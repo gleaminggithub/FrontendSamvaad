@@ -1,10 +1,8 @@
 import React, { useState ,useContext} from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
-import SendIcon from '@mui/icons-material/Send';
 import "../css/style.css";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { MyContext } from "../ContextApi/remove";
 export default function ChatInput({ handleSendMsg }) {
   const [msg, setMsg] = useState("");
@@ -72,7 +70,7 @@ export default function ChatInput({ handleSendMsg }) {
       {/* Message Input Form */}
       <form className="input-form" onSubmit={(event) => sendChat(event)}>
       <label htmlFor="file-upload" className="upload-button">
-            <AttachFileIcon />
+            <span>AttachFileIconB</span>
           </label>
         <button className="upload-button">
           {/* Actual File Input */}
@@ -101,7 +99,7 @@ export default function ChatInput({ handleSendMsg }) {
   )}
 </div>
         <button type="submit">
-          <SendIcon className="submit_button" />
+          <span className="submit_button" >SendIcon</span>
         </button>
       </form>
     </div>
